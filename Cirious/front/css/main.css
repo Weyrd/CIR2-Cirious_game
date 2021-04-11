@@ -1,0 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Courgette&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap);
+
+body {
+  height: 100vh;
+  background-color: #3c5cbb !important;
+}
+
+
+#wrapper {
+  display: grid;
+}
+
+#wrapper div {
+  margin: 0%;
+  transition: border 0.1s ease-in-out;
+}
