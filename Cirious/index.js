@@ -27,6 +27,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // Init of express, to point our assets
 app.use(express.static(__dirname + '/front/'));
+
 app.use(urlencodedParser);
 app.use(session);
 
@@ -44,9 +45,13 @@ if (app.get('env') === 'production') {
 
 /**** route ****/
 
-
 app.get('/', (req, res) => { //REDIRECTION PAR DEFAUT
-  res.render(__dirname + '/front/index.html');
+  res.sendFile(__dirname + '/front/html/home.html');
+});
+
+
+app.get('/game', (req, res) => {
+  res.sendFile(__dirname + '/front/html/game.html');
 });
 
 
@@ -56,7 +61,7 @@ app.get('/', (req, res) => { //REDIRECTION PAR DEFAUT
 io.on('connection', (socket) => {
   console.log('Un Utilisateur s\'est connecté\n');
 
-    socket.on("createTerr", () => {
+    socket.on("chotto", () => {
       socket.handshake.session.terr = "Non";
     });
 
