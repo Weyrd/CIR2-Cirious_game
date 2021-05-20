@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
-  <head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Cirious Game</title>
-	  <link rel="stylesheet" href="css/main.css">
-	  <link rel="stylesheet" href="css/block.css">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-		<script src="/socket.io/socket.io.js"></script>
-	  <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
-<script src="https://threejs.org/examples/js/libs/dat.gui.min.js"></script>
+  <title>Cirious Game</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/block.css">
 
-		<meta property="og:url" content="http://...">
-	  <meta property="og:title" content="Cirious Game">
-	  <meta property="og:site_name" content="Cirious Game">
-	  <meta property="og:description" content="Jsp">
-	  <meta name="theme-color" content="#aaaaaa">
-	  <meta property="og:image" content="http://.png">
-  </head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
+  <script src="https://threejs.org/examples/js/libs/dat.gui.min.js"></script>
 
-  <body>
-      <script>let socket = io();</script>
-      <script  src="js/main.js"></script>
-      <script  src="js/phaser.js"></script>
+  <meta property="og:url" content="http://...">
+  <meta property="og:title" content="Cirious Game">
+  <meta property="og:site_name" content="Cirious Game">
+  <meta property="og:description" content="Jsp">
+  <meta name="theme-color" content="#aaaaaa">
+  <meta property="og:image" content="http://.png">
+</head>
 
-      <div id='wrapper' class="box-wrap"></div>
-  </body>
+<body>
+  <script>
+    let socket = io();
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/phaser.js"></script>
+
+  <div id='wrapper' class="box-wrap"></div>
+</body>
+
 </html>
