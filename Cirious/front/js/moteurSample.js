@@ -15,8 +15,9 @@ function preload() {
   this.load.image('escalierbleu', 'assets/tilemaps/tiles/escalierbleu.png');
   this.load.image('escalierparquet', 'assets/tilemaps/tiles/escalierparquet.png');
   this.load.image('escaliervert', 'assets/tilemaps/tiles/escaliervert.png');
-  this.load.image('Penterverte', 'assets/tilemaps/tiles/Penterverte.png');
+  this.load.image('Pentevert', 'assets/tilemaps/tiles/Pentevert.png');
   this.load.image('pentebleu', 'assets/tilemaps/tiles/pentebleu.png');
+  this.load.image('solbleu', 'assets/tilemaps/tiles/solbleu.png');
 
   this.load.spritesheet('player', 'assets/sprites/meuf.png', {
     frameWidth: 14,
@@ -38,8 +39,9 @@ function create() {
   this.tilesetEscalierbleu = this.map.addTilesetImage('escalierbleu');
   this.tilesetEscalierparquet = this.map.addTilesetImage('escalierparquet');
   this.tilesetEscaliervert = this.map.addTilesetImage('escaliervert');
-  this.tilesetPenterverte = this.map.addTilesetImage('Penterverte');
+  this.tilesetPenteverte = this.map.addTilesetImage('Pentevert');
   this.tilesetPentebleu = this.map.addTilesetImage('pentebleu');
+  this.tilesetSolbleu = this.map.addTilesetImage('solbleu');
 
   tileset = [
     this.tilesetInterieur,
@@ -48,15 +50,16 @@ function create() {
     this.tilesetEscalierbleu,
     this.tilesetEscalierparquet,
     this.tilesetEscaliervert,
-    this.tilesetPenterverte,
-    this.tilesetPentebleu
+    this.tilesetPenteverte,
+    this.tilesetPentebleu,
+    this.tilesetSolbleu
   ]
 
   this.BGlayer = this.map.createLayer('map', tileset, 0, 0);
-  this.ObjectLayer = this.map.getObjectLayer('items')['objects'];
+
 
   /* Player */
-  this.player = this.physics.add.sprite(247, 373, 'player', 0);
+  this.player = this.matter.add.sprite(247, 373, 'player', 0);
   this.playerSpeed = 3;
 
   this.anims.create({
@@ -97,9 +100,8 @@ function create() {
   });
 
 
-  this.Collision = this.map.createLayer('Collision', this.tilesetInterieur, 0, 0);
+  this.Collision = this.map.createLayer('Collision', this.tilesetInterieur);
 
-  this.physics.add.collider(this.player, this.Collision);
 
 
 
@@ -107,12 +109,13 @@ function create() {
   /*this.map.setCollisionByProperty({
     collides: true
   });*/
-  //this.physics.world.convertTilemapLayer(this.BGlayer);
+  this.matter.world.convertTilemapLayer(this.BGlayer);
+  this.matter.world.convertTilemapLayer(this.Collision);
   //this.matter.world.setBounds(0, 0);
 
   /* Text and marker for test */
   this.marker = this.add.graphics();
-  this.marker.lineStyle(2, 0xffffff, 1);
+  this.marker.lineStyle(1.3, 0xffffff, 1);
   this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
 
   this.propertiesText = this.add.text(400, 200, 'Properties: ', {
@@ -143,26 +146,42 @@ function create() {
 
 
   /* Objects */
-  objects = this.physics.add.staticGroup()
+  //objects = this.physics.add.staticGroup()
   //this is how we actually render our coin object with coin asset we loaded into our game in the preload function
+
+  this.ObjectLayer = this.map.getObjectLayer('items')['objects'];
   this.ObjectLayer.forEach(object => {
-    let obj = objects.create(object.x, object.y, "key");
-    //obj.setScale(object.width / 16, object.height / 16);
-    obj.setOrigin(0.5, 0.5);
-    obj.body.width = object.width;
-    obj.body.height = object.height;
-    //add dans une liste
+
+    obj = this.matter.add.image(object.x, object.y - object.width, 'key', 0).setInteractive();
   });
 
+
+  this.matter.world.on('collisionstart', function(event) {
+    if (event.pairs[0].bodyA.gameObject) {
+      if (event.pairs[0].bodyB.gameObject.texture.key == "key") {
+        if (event.pairs[0].bodyA.gameObject.texture.key == "player") {
+          //event.pairs[0].bodyA.gameObject.alpha = .5
+          //this.remove(event.pairs[0].bodyA)
+          event.pairs[0].bodyB.gameObject.destroy()
+        }
+      }
+    }
+  })
+
   //collisons
-  this.physics.add.overlap(this.player, objects, walkOnKey, null, this);
+  //this.physics.add.overlap(this.player, objects, walkOnKey, null, this);
 
+  //this.physics.world.enable(this.Collision)
+  //this.matter.add.collide(this.player, this.Collision);
+  this.map.setCollisionBetween(0, 10000, true, this.Collision);
+  this.map.setCollisionByExclusion([132], true, this.Collision);
+  //this.physics.world.collide(this.Collision, this.phaserDude);*/
 
-
+  //this.physics.add.collider(this.player, objects, null, null, this);
 
 
   // Pour les tests ca fait pop des trucs
-  var atari = this.physics.add.image(217, 445, 'block');
+  var atari = this.matter.add.image(217, 445, 'block');
   atari.setSize(110, 520, true);
 
   this.input.on('pointerdown', function() {
@@ -171,7 +190,7 @@ function create() {
       var x = worldPoint.x + Phaser.Math.RND.integerInRange(-5, 5);
       var y = worldPoint.y + Phaser.Math.RND.integerInRange(-5, 5);
       var frame = Phaser.Math.RND.integerInRange(0, 8);
-      var drop = this.physics.add.image(x, y, 'player', frame);
+      var drop = this.matter.add.image(x, y, 'player', frame);
       drop.setVelocity(0, 5);
       drop.setSize(10, 10, true);
     }
@@ -290,13 +309,19 @@ var config = {
   backgroundColor: '#000000',
 
   physics: {
-    default: 'arcade',
+    default: 'matter',
+    matter: {
+      gravity: {
+        y: 0
+      },
+      debug: true
+    },
     arcade: {
       gravity: {
         y: 0
       },
       debug: true
-    }
+    },
   },
 
   scene: {
