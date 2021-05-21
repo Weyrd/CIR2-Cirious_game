@@ -12,16 +12,40 @@ function preload() {
   this.load.image('interieur', 'assets/tilemaps/tiles/interieur.png');
   this.load.image('escaliers v2', 'assets/tilemaps/tiles/escalier_upgrade.png');
   this.load.image('penteparquet', 'assets/tilemaps/tiles/penteparquet.png');
-  this.load.image('escalierbleu', 'assets/tilemaps/tiles/escalierbleu.png');
   this.load.image('escalierparquet', 'assets/tilemaps/tiles/escalierparquet.png');
   this.load.image('escaliervert', 'assets/tilemaps/tiles/escaliervert.png');
+
+
+  this.load.image('escalierbleu', 'assets/tilemaps/tiles/escalierbleu.png');
+  this.load.image('escalierjaune', 'assets/tilemaps/tiles/escalierjaune.png');
+  this.load.image('escalierorange', 'assets/tilemaps/tiles/escalierorange.png');
+  this.load.image('fenetre', 'assets/tilemaps/tiles/fenetre.png');
+  this.load.image('fleurs et pots', 'assets/tilemaps/tiles/fleurs et pots.png');
+  this.load.image('spike1', 'assets/tilemaps/tiles/spike1.png');
+  this.load.image('spike2', 'assets/tilemaps/tiles/spike2.png');
+
   this.load.image('Pentevert', 'assets/tilemaps/tiles/Pentevert.png');
   this.load.image('pentebleu', 'assets/tilemaps/tiles/pentebleu.png');
+  this.load.image('pentejaune', 'assets/tilemaps/tiles/pentejaune.png');
+  this.load.image('portefermee', 'assets/tilemaps/tiles/portefermee.png');
+
   this.load.image('solbleu', 'assets/tilemaps/tiles/solbleu.png');
+  this.load.image('soljaune', 'assets/tilemaps/tiles/soljaune.png');
+  this.load.image('solvert', 'assets/tilemaps/tiles/solvert.png');
+  this.load.image('solorange', 'assets/tilemaps/tiles/solorange.png');
+  this.load.image('solrouge', 'assets/tilemaps/tiles/solrouge.png');
+
+  this.load.image('bureauparquet', 'assets/tilemaps/tiles/bureauparquet.png');
+  this.load.image('chaise', 'assets/tilemaps/tiles/chaise.png');
+  this.load.image('chaisebleu', 'assets/tilemaps/tiles/chaisebleu.png');
+  this.load.image('chaiserose', 'assets/tilemaps/tiles/chaiserose.png');
+  this.load.image('chaiseverte', 'assets/tilemaps/tiles/chaiseverte.png');
+
+  this.load.image('collide', 'assets/tilemaps/tiles/collides.png');
 
   this.load.spritesheet('player', 'assets/sprites/meuf.png', {
     frameWidth: 14,
-    frameHeight: 18
+    frameHeight: 16
   });
 
 }
@@ -35,15 +59,47 @@ function create() {
   });
   this.tilesetInterieur = this.map.addTilesetImage('interieur');
   this.tilesetEscalier = this.map.addTilesetImage('escaliers v2');
+  this.tilesetEscalierBleu = this.map.addTilesetImage('escalierbleu');
+  this.tilesetEscalierJaune = this.map.addTilesetImage('escalierjaune');
+  this.tilesetEscalierOrange = this.map.addTilesetImage('escalierorange');
+  this.tilesetEscalierFenetre = this.map.addTilesetImage('fenetre');
+  this.tilesetFeP = this.map.addTilesetImage('fleurs et pots');
+  this.tilesetSpike = this.map.addTilesetImage('spike1');
+  this.tilesetSpike2 = this.map.addTilesetImage('spike2');
+
   this.tilesetPenteparquet = this.map.addTilesetImage('penteparquet');
   this.tilesetEscalierbleu = this.map.addTilesetImage('escalierbleu');
   this.tilesetEscalierparquet = this.map.addTilesetImage('escalierparquet');
   this.tilesetEscaliervert = this.map.addTilesetImage('escaliervert');
+
   this.tilesetPenteverte = this.map.addTilesetImage('Pentevert');
   this.tilesetPentebleu = this.map.addTilesetImage('pentebleu');
+  this.tilesetPentejaune = this.map.addTilesetImage('pentejaune');
+  this.tilesetLockDoor = this.map.addTilesetImage('portefermee');
+
   this.tilesetSolbleu = this.map.addTilesetImage('solbleu');
+  this.tilesetSoljaune = this.map.addTilesetImage('soljaune');
+  this.tilesetSolvert = this.map.addTilesetImage('solvert');
+  this.tilesetSolorange = this.map.addTilesetImage('solorange');
+  this.tilesetSolrouge = this.map.addTilesetImage('solrouge');
+
+  this.tilesetChaise = this.map.addTilesetImage('chaise');
+  this.tilesetChaisebleu = this.map.addTilesetImage('chaisebleu');
+  this.tilesetChaiserose = this.map.addTilesetImage('chaiserose');
+  this.tilesetChaiseverte = this.map.addTilesetImage('chaiseverte');
+
+  this.tilesetCollides = this.map.addTilesetImage('collide');
+
 
   tileset = [
+    this.tilesetPentejaune,
+    this.tilesetSpike2,
+    this.tilesetSpike,
+    this.tilesetFeP,
+    this.tilesetEscalierBleu,
+    this.tilesetEscalierFenetre,
+    this.tilesetEscalierJaune,
+    this.tilesetEscalierOrange,
     this.tilesetInterieur,
     this.tilesetEscalier,
     this.tilesetPenteparquet,
@@ -52,10 +108,20 @@ function create() {
     this.tilesetEscaliervert,
     this.tilesetPenteverte,
     this.tilesetPentebleu,
-    this.tilesetSolbleu
+    this.tilesetSolbleu,
+    this.tilesetSoljaune,
+    this.tilesetSolvert,
+    this.tilesetSolorange,
+    this.tilesetSolrouge,
+    this.tilesetLockDoor,
+    this.tilesetChaise,
+    this.tilesetChaiserose,
+    this.tilesetChaisebleu,
+    this.tilesetChaiseverte
   ]
 
   this.BGlayer = this.map.createLayer('map', tileset, 0, 0);
+  this.Collision = this.map.createLayer('Collision', this.tilesetCollides);
 
 
   /* Player */
@@ -100,15 +166,16 @@ function create() {
   });
 
 
-  this.Collision = this.map.createLayer('Collision', this.tilesetInterieur);
 
 
 
 
 
-  /*this.map.setCollisionByProperty({
+
+  this.map.setCollisionByProperty({
     collides: true
-  });*/
+  });
+
   this.matter.world.convertTilemapLayer(this.BGlayer);
   this.matter.world.convertTilemapLayer(this.Collision);
   //this.matter.world.setBounds(0, 0);
@@ -157,34 +224,25 @@ function create() {
 
 
   this.matter.world.on('collisionstart', function(event) {
-    if (event.pairs[0].bodyA.gameObject) {
-      if (event.pairs[0].bodyB.gameObject.texture.key == "key") {
-        if (event.pairs[0].bodyA.gameObject.texture.key == "player") {
-          //event.pairs[0].bodyA.gameObject.alpha = .5
-          //this.remove(event.pairs[0].bodyA)
-          event.pairs[0].bodyB.gameObject.destroy()
+    if (event.pairs[0].bodyB.gameObject.texture !== undefined && event.pairs[0].bodyA.gameObject.texture !== undefined) {
+      if (event.pairs[0].bodyB.id != 3) {
+        if (event.pairs[0].bodyB.gameObject.texture.key == "key") {
+          if (event.pairs[0].bodyA.gameObject.texture.key == "player") {
+            //event.pairs[0].bodyA.gameObject.alpha = .5
+            //this.remove(event.pairs[0].bodyA)
+            event.pairs[0].bodyB.gameObject.destroy()
+          }
         }
       }
     }
   })
-
-  //collisons
-  //this.physics.add.overlap(this.player, objects, walkOnKey, null, this);
-
-  //this.physics.world.enable(this.Collision)
-  //this.matter.add.collide(this.player, this.Collision);
-  this.map.setCollisionBetween(0, 10000, true, this.Collision);
-  this.map.setCollisionByExclusion([132], true, this.Collision);
-  //this.physics.world.collide(this.Collision, this.phaserDude);*/
-
-  //this.physics.add.collider(this.player, objects, null, null, this);
 
 
   // Pour les tests ca fait pop des trucs
   var atari = this.matter.add.image(217, 445, 'block');
   atari.setSize(110, 520, true);
 
-  this.input.on('pointerdown', function() {
+  /*this.input.on('pointerdown', function() {
     var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
     for (var i = 0; i < 4; i++) {
       var x = worldPoint.x + Phaser.Math.RND.integerInRange(-5, 5);
@@ -195,13 +253,15 @@ function create() {
       drop.setSize(10, 10, true);
     }
   }, this);
-  ///
+  */
 
 
 }
 
 function update(time, delta) {
   //controls.update(delta);
+  var playerTileY = this.map.worldToTileY(this.player.x);
+  var playerTileX = this.map.worldToTileY(this.player.y);
 
   /* Move player by keayboard */
   if (this.input.keyboard.addKey('z').isDown) {
@@ -227,11 +287,23 @@ function update(time, delta) {
   }
 
   if (this.input.keyboard.addKey('f').isDown) {
-    var playerTileY = this.map.worldToTileY(this.player.x);
-    var playerTileX = this.map.worldToTileY(this.player.y);
     interaction(playerTileX, playerTileY, this.player.x, this.player.y)
   }
 
+  /* IS TP*/
+  x = playerTileX
+  y = playerTileY
+  for (var i = 0; i <= tp.length - 1; i++) {
+    if (
+      (x == tp[i][0][0] && y == tp[i][0][1]) ||
+      (x - 1 == tp[i][0][0] && y == tp[i][0][1]) ||
+      (x - 1 == tp[i][0][0] && y - 1 == tp[i][0][1]) ||
+      (x == tp[i][0][0] && y - 1 == tp[i][0][1])
+    ) {
+      this.player.x = this.map.tileToWorldX(tp[i][1][1]);
+      this.player.y = this.map.tileToWorldY(tp[i][1][0]);
+    }
+  }
 
 
   /* gamepad control */
@@ -278,10 +350,15 @@ function update(time, delta) {
   if (this.input.manager.activePointer.isDown) {
     var tile = this.map.getTileAt(pointerTileX, pointerTileY);
 
+    this.player.x = this.map.tileToWorldX(pointerTileX);
+    this.player.y = this.map.tileToWorldY(pointerTileY);
+
     if (tile) {
       // Note: JSON.stringify will convert the object tile properties to a string
-      this.propertiesText.setText('Properties: ' + JSON.stringify(this.map.tilesets[0].tileProperties[tile.index]));
+      this.propertiesText.setText('Properties: ' + JSON.stringify(this.map.til));
       console.log("Tile Id : ", tile.index, this.marker.x, this.marker.y);
+
+
     }
   }
 }
@@ -289,15 +366,73 @@ function update(time, delta) {
 
 function interaction(x, y, pixX, pixY) {
   console.log(x, y, pixX, pixY);
-
   //coin.destroy(coin.x, coin.y);
 }
 
-function walkOnKey(player, key) {
-  key.destroy()
-  console.log("nikétmor");
-}
 
+
+
+
+var tp = [
+  [ //ss-4 -> ss-3
+    [20, 29],
+    [87, 32]
+  ],
+  [ //ss-4 -> ss-3 fauteil
+    [3, 3],
+    [74, 5]
+  ],
+
+  [ //ss-3 -> ss-4
+    [90, 32],
+    [23, 29]
+  ],
+
+  [ //ss-3 -> ss-4 fauteil
+    [74, 8],
+    [5, 7]
+  ],
+
+  [ //ss-3 -> ss-2
+    [115, 6],
+    [184, 9]
+  ],
+  [ //ss-2 -> ss-3
+    [183, 6],
+    [116, 3]
+  ],
+  [ //ss-2 -> ss-1
+    [151, 14],
+    [232, 10]
+  ],
+  [ //ss-1 -> ss-2
+    [234, 10],
+    [155, 15]
+  ],
+
+  [ //ss-1 -> ss-2
+    [234, 10],
+    [155, 15]
+  ],
+
+  [ //ss-1 -> ss
+    [265, 29],
+    [416, 23]
+  ],
+  [ //ss -> ss-1
+    [416, 20],
+    [266, 26]
+  ],
+
+  [ //ss-1 -> ss  /2
+    [264, 42],
+    [416, 42]
+  ],
+  [ //ss -> ss-1 /2
+    [418, 45],
+    [266, 45]
+  ],
+]
 
 
 
