@@ -1,0 +1,81 @@
+@import url(https://fonts.googleapis.com/css?family=Courgette&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap);
+@font-face {
+    font-family: "Silkscreen";
+    src: url("slkscr.ttf");
+}
+
+body {
+background-color:rgb(27, 27, 27);
+font-family: "Silkscreen";
+color:white;
+width: 100vw;
+position: fixed;
+margin: 0;
+}
+
+.box {
+/* animation: slide 30s ease-in-out 3s both; */
+animation: slide 29s cubic-bezier(.20, 0, .80, 1) 3s both;
+text-align: center;
+}
+
+.box div {
+margin: 4vw 0 0 0;
+}
+
+#title {
+font-size: 5vw;
+margin: 0 0 30vw 0;
+font-family: "Silkscreen";
+color:white;
+}
+
+#thanks {
+margin: 50vh 0 0 0;
+}
+
+h1 {
+font-size: 3vw;
+margin: 2vw 0 2vw 0;
+font-family: "Silkscreen";
+color:white;
+
+}
+
+p {
+font-size: 1.5vw;
+margin: 1vw 0 0 0;
+font-family: 'Roboto';
+color:white;
+}
+
+a {
+font-size: 1.5vw;
+margin: 1vw 0 0 0;
+color:white;
+font-family: 'Roboto';
+text-decoration: none;
+}
+
+a:hover, a:active, a:focus {
+color: black;
+text-decoration: none;
+}
+
+.link {
+  color:white;
+font-family: 'Roboto';
+font-weight: 900;
+font-size: 1.75vw;
+}
+
+@keyframes slide {
+0% {
+margin-top: 40vh;
+}
+
+100% {
+margin-top: -149vw;
+}
+}
