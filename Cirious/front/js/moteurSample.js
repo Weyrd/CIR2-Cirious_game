@@ -26,7 +26,7 @@ function preload() {
   this.load.image('collide', 'assets/tilemaps/tiles/collides.png');
 
   this.load.image('escaliers v2', 'assets/tilemaps/tiles/escalier_upgrade.png');
-  this.load.image('escalierbleu', 'assets/tilemaps/tiles/escalierbleue.png');
+  this.load.image('escalierbleu', 'assets/tilemaps/tiles/escalierbleu.png');
   this.load.image('escalierjaune', 'assets/tilemaps/tiles/escalierjaune.png');
   this.load.image('escalierorange', 'assets/tilemaps/tiles/escalierorange.png');
   this.load.image('escalierparquet', 'assets/tilemaps/tiles/escalierparquet.png');
@@ -76,17 +76,17 @@ function create() {
   this.keysList = []
   this.doorList = []
   this.doorPos = [
-    [91, 127, 0],
+    [95, 113, 0],
     [72, 760, 0],
     [138, 808, 1],
-    [329, 808, 1],
-    [429, 842, 0],
-    [341, 911, 1],
+    [337.5, 800, 1],
+    [432, 846, 0],
+    [334, 912, 1],
     [175, 911, 1],
-    [112, 1368, 0],
-    [249, 1880, 1],
-    [281, 3004, 0],
-    [262, 3006, 0]
+    [121, 1358, 0],
+    [256, 1880, 1],
+    [276, 2997, 0],
+    [275, 2996, 0]
   ]
 
   /* Init map and world */
@@ -510,8 +510,8 @@ function update(time, delta) {
   if (this.input.manager.activePointer.isDown) {
     var tile = this.map.getTileAt(pointerTileX, pointerTileY, true, this.BGlayer);
 
-    //this.player.x = this.map.tileToWorldX(pointerTileX);
-    //this.player.y = this.map.tileToWorldY(pointerTileY);
+    this.player.x = this.map.tileToWorldX(pointerTileX);
+    this.player.y = this.map.tileToWorldY(pointerTileY);
     if (tile) {
       console.log(tile.index);
       this.map.swapByIndex(tile.index, 4, 1, 1, 1, 1, this.BGlayer);
