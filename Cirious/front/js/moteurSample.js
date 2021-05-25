@@ -60,11 +60,6 @@ function preload() {
 
 
 
-
-
-
-
-
   this.load.spritesheet('player', 'assets/sprites/meuf.png', {
     frameWidth: 14,
     frameHeight: 16
@@ -229,10 +224,6 @@ function create() {
 
 
 
-
-
-
-
   this.map.setCollisionByProperty({
     collides: true
   }, true, true, this.Collision);
@@ -274,9 +265,6 @@ function create() {
 
 
   /* Objects */
-  //objects = this.physics.add.staticGroup()
-  //this is how we actually render our coin object with coin asset we loaded into our game in the preload function
-
   this.ObjectLayer = this.map.getObjectLayer('items')['objects'];
   this.ObjectLayer.forEach(object => {
 
@@ -323,22 +311,7 @@ function create() {
   })
 
 
-  // Pour les tests ca fait pop des trucs
   var stick = this.matter.add.image(19, 651, 'stick');
-  //stick.setSize(150, 8, true);
-
-  /*this.input.on('pointerdown', function() {
-    var worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
-    for (var i = 0; i < 4; i++) {
-      var x = worldPoint.x + Phaser.Math.RND.integerInRange(-5, 5);
-      var y = worldPoint.y + Phaser.Math.RND.integerInRange(-5, 5);
-      var frame = Phaser.Math.RND.integerInRange(0, 8);
-      var drop = this.matter.add.image(x, y, 'player', frame);
-      drop.setVelocity(0, 5);
-      drop.setSize(10, 10, true);
-    }
-  }, this);
-  */
 
 
 }
@@ -413,8 +386,6 @@ function update(time, delta) {
         }
       }
     }
-
-    console.log("good");
   }
 
   /* IS TP*/
@@ -491,8 +462,6 @@ function update(time, delta) {
           }
         }
       }
-
-      console.log("good");
     }
   }
 
@@ -507,24 +476,11 @@ function update(time, delta) {
   this.marker.x = this.map.tileToWorldX(pointerTileX);
   this.marker.y = this.map.tileToWorldY(pointerTileY);
 
+
   if (this.input.manager.activePointer.isDown) {
     var tile = this.map.getTileAt(pointerTileX, pointerTileY, true, this.BGlayer);
-
     this.player.x = this.map.tileToWorldX(pointerTileX);
     this.player.y = this.map.tileToWorldY(pointerTileY);
-    if (tile) {
-      console.log(tile.index);
-      this.map.swapByIndex(tile.index, 4, 1, 1, 1, 1, this.BGlayer);
-      this.map.putTileAt(4644, this.marker.x, this.marker.y, true, this.Collision)
-      this.map.removeTileAt(this.marker.x, this.marker.y, true, true, this.Collision)
-
-      console.log("goods");
-      // Note: JSON.stringify will convert the object tile properties to a string
-      //  this.propertiesText.setText('Properties: ' + JSON.stringify(this.map.til));
-      //console.log("Tile Id : ", tile.index, this.marker.x, this.marker.y);
-
-
-    }
   }
 }
 
