@@ -77,7 +77,7 @@ function create() {
   this.doorList = []
   this.doorPos = [
     [91, 127, 0],
-    [72, 765, 0],
+    [72, 760, 0],
     [138, 808, 1],
     [329, 808, 1],
     [429, 842, 0],
@@ -445,9 +445,7 @@ function update(time, delta) {
         this.player.anims.play('right', true);
         this.player.x += this.playerSpeed;
         this.player.flipX = true;
-      }
-
-      if (this.gamepad.axes[1].getValue() < 0) {
+      } else if (this.gamepad.axes[1].getValue() < 0) {
         this.player.anims.play('up', true);
         this.player.y -= this.playerSpeed;
       } else if (this.gamepad.axes[1].getValue() > 0) {
@@ -460,6 +458,41 @@ function update(time, delta) {
       this.registry.destroy(); // destroy registry
       this.events.off(); // disable all active events
       this.scene.restart(); // restart current scene
+    }
+    if (this.gamepad.buttons[2].pressed) {
+      console.log(this.player.x, this.player.y, playerTileX, playerTileY);
+
+      for (var i = -2; i < 3; i++) {
+        for (var j = -2; j < 3; j++) {
+          /* Check if key*/
+          for (var k = 0; k < this.keysList.length - 1; k++) {
+            objY = this.map.worldToTileX(this.keysList[k]["_tempVec2"].x);
+            objX = this.map.worldToTileY(this.keysList[k]["_tempVec2"].y);
+
+            if (objX == playerTileX + i && objY == playerTileY + j) {
+              this.keysList[k].destroy()
+              this.keysList.splice(k, 1)
+              keys += 1
+            }
+          }
+
+          /* Check if door*/
+          for (var k = 0; k < this.doorList.length - 1; k++) {
+            objY = this.map.worldToTileX(this.doorList[k]["_tempVec2"].x);
+            objX = this.map.worldToTileY(this.doorList[k]["_tempVec2"].y);
+
+            if (objX == playerTileX + i && objY == playerTileY + j) {
+              if (keys > 0) {
+                this.doorList[k].destroy()
+                this.doorList.splice(k, 1)
+                numberKeys -= 1
+              }
+            }
+          }
+        }
+      }
+
+      console.log("good");
     }
   }
 
