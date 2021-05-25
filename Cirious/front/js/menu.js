@@ -2,6 +2,7 @@ let sanshandicap = document.getElementById("sanshandicap");
 let myope = document.getElementById("myopie");
 let aveugle = document.getElementById("cecite");
 let parkinson = document.getElementById("parkinson");
+let fauteuil = document.getElementById("fauteuil");
 
 sanshandicap.addEventListener("mouseover", function() {
     sanshandicap.innerText = "< Sans handicap >";
@@ -40,5 +41,15 @@ parkinson.addEventListener("mouseover", function() {
 
 parkinson.addEventListener("mouseleave", function() {
     parkinson.innerText = "Parkinson";
+    document.getElementById("desc").innerText = "";
+});
+
+fauteuil.addEventListener("mouseover", function() {
+    fauteuil.innerText = "< Fauteuil roulant >";
+    document.getElementById("desc").innerText = "Un accident physique vous a mis dans l'incapacite de vous deplacer normalement ? Pas de panique ! Les infrastructures ont également été pensées pour vous. Enfin, normalement...";
+});
+
+fauteuil.addEventListener("mouseleave", function() {
+    fauteuil.innerText = "Fauteuil roulant";
     document.getElementById("desc").innerText = "";
 });
