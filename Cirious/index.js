@@ -16,19 +16,14 @@ const session = require("express-session")({
 });
 const sharedsession = require("express-socket.io-session");
 const bodyParser = require('body-parser');
-const {
-  body,
-  validationResult
-} = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
 
 
 /**** Project configuration ****/
 
 const jsonParser = bodyParser.json();
-const urlencodedParser = bodyParser.urlencoded({
-  extended: false
-});
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // Init of express, to point our assets
 app.use(express.static(__dirname + '/front/'));
@@ -59,19 +54,19 @@ app.get('/game', (req, res) => {
   res.sendFile(__dirname + '/front/html/game.html');
 });
 
-
-app.get('/credit', (req, res) => {
-  res.sendFile(__dirname + '/front/html/credit.html');
+app.get('/fauteuil', (req, res) => {
+  res.sendFile(__dirname + '/front/html/fauteuil.html');
 });
+
 
 
 
 io.on('connection', (socket) => {
   console.log('Un Utilisateur s\'est connecté\n');
 
-  socket.on("chotto", () => {
-    socket.handshake.session.terr = "Non";
-  });
+    socket.on("chotto", () => {
+      socket.handshake.session.terr = "Non";
+    });
 
 
 
