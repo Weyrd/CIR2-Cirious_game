@@ -43,6 +43,10 @@ function checkcollide(move,posx,posy,playerSpeed,map,colision,propertiesText){
     //console.log(tile)
     if (tile!=null) {
       if(JSON.stringify(tile.properties.collides)==='true') {
+
+        if (mode == "aveugle"){
+          
+        }
         return false;
       }
     }
@@ -84,7 +88,13 @@ function preload() {
   ]);
 
   /* Sprite */
-  this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
+
+  if (mode=="aveugle"){
+    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvlaveugle.json');  
+  }
+  else{
+    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
+  }
   this.load.image('key', 'assets/sprites/key.png');
   this.load.image('stick', 'assets/sprites/batondepierre.png');
   this.load.image('verticalDoor', 'assets/sprites/verticalDoor.png');
@@ -627,7 +637,9 @@ var tp = [
   ],
 ]
 
-
+var circle;
+var graphics;
+var a = 0;
 
 var config = {
   type: Phaser.AUTO,

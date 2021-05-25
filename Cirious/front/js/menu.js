@@ -26,7 +26,7 @@ myope.addEventListener("mouseleave", function() {
 
 aveugle.addEventListener("mouseover", function() {
     aveugle.innerText = "< Cecite >";
-    document.getElementById("desc").innerText = "Devenez aveugle et apprenez a vous reperer sans vos yeux pour vous guider. Les sons deviendront alors d'une extreme importance."
+    document.getElementById("desc").innerText = "Devenez aveugle et apprenez a vous reperer sans vos yeux pour vous guider."
 });
 
 aveugle.addEventListener("mouseleave", function() {

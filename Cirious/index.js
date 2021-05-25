@@ -58,6 +58,10 @@ app.get('/fauteuil', (req, res) => {
   res.sendFile(__dirname + '/front/html/fauteuil.html');
 });
 
+app.get('/aveugle', (req, res) => {
+  res.sendFile(__dirname + '/front/html/aveugle.html');
+});
+
 app.get('/credit', (req, res) => {
   res.sendFile(__dirname + '/front/html/credit.html');
 });
