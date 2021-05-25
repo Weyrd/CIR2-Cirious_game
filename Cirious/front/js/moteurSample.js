@@ -485,7 +485,7 @@ function update(time, delta) {
               if (keys > 0) {
                 this.doorList[k].destroy()
                 this.doorList.splice(k, 1)
-                numberKeys -= 1
+                keys -= 1
               }
             }
           }
