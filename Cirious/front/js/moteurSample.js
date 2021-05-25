@@ -1,3 +1,79 @@
+function checkescalier(move,posx,posy,playerSpeed,map,BGlayer,propertiesText){ //on verifie si la case sur laquelle le joueur va se trouver est un escalier
+  if(move=="up"){
+    posy-= playerSpeed
+  }
+  if(move=="left"){
+    posx-= playerSpeed
+  }
+  if(move=="down"){
+    posy += playerSpeed
+  }
+  if(move=="right"){
+    posx += playerSpeed
+  }
+
+  let playerTileY = map.worldToTileY(posy);
+  let playerTileX = map.worldToTileY(posx);
+  let tile = map.getTileAt(playerTileX , playerTileY , true, BGlayer);
+  if(tile!=null) if(JSON.stringify(tile.properties.handicap)=="true") return false
+  else return true
+}
+
+//if(mode!="handicaphysique" || !checkescalier(deplacement,this.player.x,this.player.y,this.playerSpeed)) 
+function checkcollide(move,posx,posy,playerSpeed,map,colision,propertiesText){
+   if(move=="up"){
+      posy-= playerSpeed*2
+    }
+    if(move=="left"){
+      posx-= playerSpeed*2
+    }
+    if(move=="down"){
+      posy += playerSpeed*2
+    }
+    if(move=="right"){
+      posx += playerSpeed*2
+    }
+
+    let playerTileY = map.worldToTileY(posy);
+    let playerTileX = map.worldToTileY(posx);
+    
+    let tile = map.getTileAt(playerTileX , playerTileY , true, colision);
+    
+    //if (tile!=null) propertiesText.setText('Properties: ' + JSON.stringify(tile.properties.collides));
+    //console.log(tile)
+    if (tile!=null) {
+      if(JSON.stringify(tile.properties.collides)==='true') {
+        return false;
+      }
+    }
+      return true;
+  }
+
+function mouvement(deplacement,player,playerSpeed,map,BGlayer,propertiesText,collide){
+  let peutdeplacement = true;
+  peutdeplacement=checkcollide(deplacement,player.x,player.y,playerSpeed,map,collide,propertiesText)
+  //console.log(peutdeplacement)
+  if(mode=="handicaphysique" && peutdeplacement!=false) peutdeplacement=checkescalier(deplacement,player.x,player.y,playerSpeed,map,BGlayer,propertiesText)
+  if(deplacement=="up"){
+    player.anims.play('up', true);
+    if(peutdeplacement==true) player.y -= playerSpeed;
+  }
+  if(deplacement=="left"){
+    player.anims.play('left', true);
+    if(peutdeplacement==true) player.x -= playerSpeed;
+    player.flipX = false;
+  }
+  if(deplacement=="down"){
+    player.anims.play('down', true);
+    if(peutdeplacement==true) player.y += playerSpeed;
+  }
+  if(deplacement=="right"){
+    player.anims.play('right', true);
+    if(peutdeplacement==true) player.x += playerSpeed;
+    player.flipX = true;
+  }
+}
+
 var keys = 0
 
 function preload() {
@@ -178,6 +254,7 @@ function create() {
 
   this.BGlayer = this.map.createLayer('map', tileset);
   this.Collision = this.map.createLayer('Collision', this.tilesetCollides);
+   this.CollidePorte = this.map.createLayer('CollidePorte', this.tilesetInterieur);
 
 
   /* Player */
@@ -225,11 +302,12 @@ function create() {
 
 
   this.map.setCollisionByProperty({
-    collides: true
-  }, true, true, this.Collision);
+    porteColide: true
+  }, true, true, this.CollidePorte);
 
-  this.matter.world.convertTilemapLayer(this.BGlayer);
   this.matter.world.convertTilemapLayer(this.Collision);
+  this.matter.world.convertTilemapLayer(this.CollidePorte);
+  this.matter.world.convertTilemapLayer(this.BGlayer);
   //this.matter.world.setBounds(0, 0);
 
   /* Text and marker for test */
@@ -314,6 +392,9 @@ function create() {
   var stick = this.matter.add.image(19, 651, 'stick');
 
 
+
+
+
 }
 
 function update(time, delta) {
@@ -324,27 +405,21 @@ function update(time, delta) {
   var playerTileY = this.map.worldToTileY(this.player.x);
   var playerTileX = this.map.worldToTileY(this.player.y);
 
-  if ((playerTileY == 31 && playerTileX == 151) || (playerTileY == 29 && playerTileX == 186)) {
+  if ((playerTileY == 31 && playerTileX == 151) || (playerTileY == 29 && playerTileX == 186) || (playerTileY == 29 && playerTileX == 185) || (playerTileY == 29 && playerTileX == 184) || (playerTileY == 31 && playerTileX == 152)) {
     this.cameras.main.zoom = 2.5
-  } else if ((playerTileY == 30 && playerTileX == 186) || (playerTileY == 32 && playerTileX == 151)) {
+  } else if ((playerTileY == 30 && playerTileX == 186) || (playerTileY == 30 && playerTileX == 185) || (playerTileY == 30 && playerTileX == 184) || (playerTileY == 32 && playerTileX == 151)|| (playerTileY == 32 && playerTileX == 152)) {
     this.cameras.main.zoom = 9
   }
 
   /* Move player by keayboard */
   if (this.input.keyboard.addKey('z').isDown) {
-    this.player.anims.play('up', true);
-    this.player.y -= this.playerSpeed;
+  mouvement("up",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
   } else if (this.input.keyboard.addKey('q').isDown) {
-    this.player.anims.play('left', true);
-    this.player.x -= this.playerSpeed;
-    this.player.flipX = false;
+    mouvement("left",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
   } else if (this.input.keyboard.addKey('s').isDown) {
-    this.player.anims.play('down', true);
-    this.player.y += this.playerSpeed;
+    mouvement("down",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
   } else if (this.input.keyboard.addKey('d').isDown) {
-    this.player.anims.play('right', true);
-    this.player.x += this.playerSpeed;
-    this.player.flipX = true;
+    mouvement("right",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
   }
 
   if (this.input.keyboard.addKey('r').isDown) {
@@ -405,25 +480,20 @@ function update(time, delta) {
 
 
   /* gamepad control */
-  if (this.gamepad) {
+if (this.gamepad) {
     if (this.gamepad.axes[0].getValue() != 0 || this.gamepad.axes[1].getValue() != 0) {
-
       if (this.gamepad.axes[0].getValue() < 0) {
-        this.player.anims.play('left', true);
-        this.player.x -= this.playerSpeed;
-        this.player.flipX = false;
+        mouvement("left",this.player,this.playerSpeed)
       } else if (this.gamepad.axes[0].getValue() > 0) {
-        this.player.anims.play('right', true);
-        this.player.x += this.playerSpeed;
-        this.player.flipX = true;
-      } else if (this.gamepad.axes[1].getValue() < 0) {
-        this.player.anims.play('up', true);
-        this.player.y -= this.playerSpeed;
+        mouvement("right",this.player,this.playerSpeed)
+      }
+      if (this.gamepad.axes[1].getValue() < 0) {
+        mouvement("up",this.player,this.playerSpeed)
       } else if (this.gamepad.axes[1].getValue() > 0) {
-        this.player.anims.play('down', true);
-        this.player.y += this.playerSpeed;
+        mouvement("down",this.player,this.playerSpeed)
       }
     }
+
 
     if (this.gamepad.buttons[0].pressed) {
       this.registry.destroy(); // destroy registry
