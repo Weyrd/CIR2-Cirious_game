@@ -315,9 +315,14 @@ function create() {
   this.marker.lineStyle(1.3, 0xffffff, 1);
   this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
 
-  this.numberKeys = this.add.text(400, 200, 'Nb clé : ' + keys, {
+  this.imageKey = this.add.image(400, 200, 'key');
+  this.imageKey.setScrollFactor(0);
+  this.numberKeys = this.add.text(408, 190, keys, {
+    fontFamily: 'Arial',
     fontSize: '18px',
-    fill: '#ffffff'
+    fill: '#fff',
+    stroke: '#000',
+    strokeThickness: 2
   });
   this.numberKeys.setScrollFactor(0);
 
@@ -398,7 +403,7 @@ function create() {
 }
 
 function update(time, delta) {
-  this.numberKeys.setText("Nb keys : " + keys)
+  this.numberKeys.setText(keys);
 
 
   //controls.update(delta);
