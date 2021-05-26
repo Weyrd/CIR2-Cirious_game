@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "Silkscreen";
+    src: url("slkscr.ttf");
+}
+
+body{
+    font-family: "Silkscreen";
+    color:white;
+    background-color:rgb(27, 27, 27);
+}
+
+div{text-align: center;}
+
+img{
+    width: 50%
+}
+
+.boutonretour{text-align:left;}
+
+.touche{
+    border: 4px solid #B2B2B2;
+border-radius: 20px;
+}
+
+.partieclavier {
+  border-right: 1px solid #B2B2B2;
+}
+
+.partiemanette {
+  border-left: 1px solid #B2B2B2;
+}
