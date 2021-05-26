@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta property="og:url" content="http://...">
+    <meta property="og:title" content="Cirious Game">
+    <meta property="og:site_name" content="Cirious Game">
+    <meta property="og:description" content="Jsp">
+    <meta name="theme-color" content="#aaaaaa">
+    <meta property="og:image" content="http://.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/home.css" type="text/css">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/controle.css" type="text/css">
+    <title>Cirious Game</title>
+
+  <script src="js/controle.js"></script>
+  </head>
+  <body>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="boutonretour">
+            <br/><a href="/">
+              <button type="button" class="btn btn-secondary btn-sm">
+                Retour
+              </button></a><br/></p>
+          </div>
+        </div>
+        <div class="row">
+          <br/> <br/>
+            <div class="col-md-6 partieclavier">
+                <div class="row">
+                    <div class="col-md-12">
+                        <br/><h2><u>Clavier:</u></h2><br/><br/><br/>Se deplacer<br/><br/>
+                        <div class="row">
+                          <div class="col-sm-5 col-xs-5"></div>
+                          <div class="col-sm-2 col-xs-2"><p id="keyZ" class="touche">Z</p></div>
+                          <div class="col-sm-5 col-xs-5"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3 col-xs-3"></div>
+                          <div class="col-sm-2 col-xs-2"><p id="keyQ" class="touche">Q</p></div>
+                          <div class="col-sm-2 col-xs-2"><p id="keyS" class="touche">S</p></div>
+                          <div class="col-sm-2 col-xs-2"><p id="keyD" class="touche">D</p><br/><br/></div>
+                          <div class="col-sm-3 col-xs-3"></div>
+                        </div>
+                     </div>
+                    </div>
+                
+            <div class="row">
+              <div class="col-md-6">
+                Reset<br/><br/>
+                <div class="row">
+                  <div class="col-sm-4 col-xs-4"></div>
+                  <div class="col-sm-4 col-xs-4"><p id="keyR" class="touche">R</p></div>
+                  <div class="col-sm-4 col-xs-4"></div>
+                </div>
+              </div>
+              <br/>
+              <div class="col-md-6">
+                Ramasser<br/><br/>
+                <div class="row">
+                  <div class="col-sm-4 col-xs-4"></div>
+                  <div class="col-sm-4 col-xs-4"><p id="keyF" class="touche">F</p></div>
+                  <div class="col-sm-4 col-xs-4"></div>
+                </div>
+              </div>
+              </div>
+           </div>
+        
+          <div class="col-md-6 partiemanette" >
+            <div class="row">
+              <div class="col-md-12">
+                <br/><h2><u>Manette:</u></h2><br/><br/><br/>Se deplacer<br/><br/><img src="https://cdn.discordapp.com/attachments/844475524767416330/847130594483896361/manette_direction.png"><br/><br/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                Reset<br/><br/><img src="https://cdn.discordapp.com/attachments/844475524767416330/847130593351041094/manette_bas.png">
+              </div>
+              <div class="col-md-6">
+                Ramasser<br/><br/><img src="https://cdn.discordapp.com/attachments/844475524767416330/847130597243093013/manette_gauche.png">
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
