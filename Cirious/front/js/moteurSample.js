@@ -21,7 +21,7 @@ function checkescalier(move, posx, posy, playerSpeed, map, BGlayer, propertiesTe
 }
 var noclip = false
 //if(mode!="handicaphysique" || !checkescalier(deplacement,this.player.x,this.player.y,this.playerSpeed))
-function checkcollide(move, posx, posy, playerSpeed, map, colision, propertiesText) {
+function checkcollide(move, posx, posy, playerSpeed, map, colision, propertiesText,oof) {
   if (move == "up") {
     posy -= playerSpeed * 2
   }
@@ -44,15 +44,18 @@ function checkcollide(move, posx, posy, playerSpeed, map, colision, propertiesTe
   //console.log(tile)
   if (tile != null) {
     if (JSON.stringify(tile.properties.collides) === 'true') {
+      if(mode=="aveugle"){
+        oof.play();
+      }
       return false;
     }
   }
   return true;
 }
 
-function mouvement(deplacement, player, playerSpeed, map, BGlayer, propertiesText, collide) {
+function mouvement(deplacement, player, playerSpeed, map, BGlayer, propertiesText, collide,oof) {
   let peutdeplacement = true;
-  peutdeplacement = checkcollide(deplacement, player.x, player.y, playerSpeed, map, collide, propertiesText)
+  peutdeplacement = checkcollide(deplacement, player.x, player.y, playerSpeed, map, collide, propertiesText,oof)
   //console.log(peutdeplacement)
   if (mode == "handicaphysique" && peutdeplacement != false) peutdeplacement = checkescalier(deplacement, player.x, player.y, playerSpeed, map, BGlayer, propertiesText)
   if (deplacement == "up") {
@@ -83,9 +86,15 @@ function preload() {
     'assets/audio/Jubilife City.mp3' //,
     //'assets/audio/oedipus_wizball_highscore.mp3'
   ]);
+  this.load.audio('oof','assets/audio/oof.mp3');
 
   /* Sprite */
-  this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
+  if (mode =="aveugle"){
+    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvlaveugle.json');  
+  }
+  else{
+    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
+  }
   this.load.image('key', 'assets/sprites/key.png');
   this.load.image('stick', 'assets/sprites/batondepierre.png');
   this.load.image('verticalDoor', 'assets/sprites/verticalDoor.png');
@@ -353,6 +362,8 @@ function create() {
   });
   this.music.play();
 
+  this.oof = this.sound.add('oof');
+
 
   /* Objects */
   this.ObjectLayer = this.map.getObjectLayer('items')['objects'];
@@ -451,13 +462,13 @@ function update(time, delta) {
 
   /* Move player by keayboard */
   if (this.input.keyboard.addKey('z').isDown) {
-    mouvement("up", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
+    mouvement("up", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
   } else if (this.input.keyboard.addKey('q').isDown) {
-    mouvement("left", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
+    mouvement("left", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision, this.oof)
   } else if (this.input.keyboard.addKey('s').isDown) {
-    mouvement("down", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
+    mouvement("down", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision, this.oof)
   } else if (this.input.keyboard.addKey('d').isDown) {
-    mouvement("right", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
+    mouvement("right", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision, this.oof)
   }
 
   if (this.input.keyboard.addKey('r').isDown) {

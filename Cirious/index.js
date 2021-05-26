@@ -72,6 +72,10 @@ app.get('/parkinson', (req, res) => {
   res.sendFile(__dirname + '/front/html/parkinson.html');
 });
 
+app.get('/aveugle', (req, res) => {
+  res.sendFile(__dirname + '/front/html/aveugle.html');
+});
+
 app.get('/credit', (req, res) => {
   res.sendFile(__dirname + '/front/html/credit.html');
 });
