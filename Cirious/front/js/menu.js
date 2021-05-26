@@ -48,7 +48,7 @@ aveugle.addEventListener("mouseleave", function() {
 
 parkinson.addEventListener("mouseover", function() {
     parkinson.innerText = "< Parkinson >";
-    document.getElementById("desc").innerText = "Inserer ici une courte description du mode de jeu"
+    document.getElementById("desc").innerText = "Tenir des objets est bien difficile... Vous ne pourrez tenir que deux cles simultanement au maximum."
 });
 
 parkinson.addEventListener("mouseleave", function() {
@@ -58,7 +58,7 @@ parkinson.addEventListener("mouseleave", function() {
 
 fauteuil.addEventListener("mouseover", function() {
     fauteuil.innerText = "< Fauteuil roulant >";
-    document.getElementById("desc").innerText = "Un accident physique vous a mis dans l'incapacite de vous deplacer normalement ? Pas de panique ! Les infrastructures ont également été pensées pour vous. Enfin, normalement...";
+    document.getElementById("desc").innerText = "Un accident physique vous a mis dans l'incapacite de vous deplacer normalement ? Pas de panique ! Les infrastructures ont egalement ete pensees pour vous. Enfin, normalement...";
 });
 
 fauteuil.addEventListener("mouseleave", function() {
