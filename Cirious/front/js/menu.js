@@ -3,6 +3,7 @@ let myope = document.getElementById("myopie");
 let aveugle = document.getElementById("cecite");
 let parkinson = document.getElementById("parkinson");
 let fauteuil = document.getElementById("fauteuil");
+let credits = document.getElementById("credits");
 
 sanshandicap.addEventListener("mouseover", function() {
     sanshandicap.innerText = "< Sans handicap >";
@@ -51,5 +52,14 @@ fauteuil.addEventListener("mouseover", function() {
 
 fauteuil.addEventListener("mouseleave", function() {
     fauteuil.innerText = "Fauteuil roulant";
+    document.getElementById("desc").innerText = "";
+});
+
+credits.addEventListener("mouseover", function() {
+    credits.innerText = "< Credits >";
+});
+
+credits.addEventListener("mouseleave", function() {
+    credits.innerText = "Fauteuil roulant";
     document.getElementById("desc").innerText = "";
 });
