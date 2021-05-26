@@ -1,75 +1,76 @@
-function checkescalier(move,posx,posy,playerSpeed,map,BGlayer,propertiesText){ //on verifie si la case sur laquelle le joueur va se trouver est un escalier
-  if(move=="up"){
-    posy-= playerSpeed
+function checkescalier(move, posx, posy, playerSpeed, map, BGlayer, propertiesText) { //on verifie si la case sur laquelle le joueur va se trouver est un escalier
+  if (move == "up") {
+    posy -= playerSpeed
   }
-  if(move=="left"){
-    posx-= playerSpeed
+  if (move == "left") {
+    posx -= playerSpeed
   }
-  if(move=="down"){
+  if (move == "down") {
     posy += playerSpeed
   }
-  if(move=="right"){
+  if (move == "right") {
     posx += playerSpeed
   }
 
   let playerTileY = map.worldToTileY(posy);
   let playerTileX = map.worldToTileY(posx);
-  let tile = map.getTileAt(playerTileX , playerTileY , true, BGlayer);
-  if(tile!=null) if(JSON.stringify(tile.properties.handicap)=="true") return false
+  let tile = map.getTileAt(playerTileX, playerTileY, true, BGlayer);
+  if (tile != null)
+    if (JSON.stringify(tile.properties.handicap) == "true") return false
   else return true
 }
-
-//if(mode!="handicaphysique" || !checkescalier(deplacement,this.player.x,this.player.y,this.playerSpeed)) 
-function checkcollide(move,posx,posy,playerSpeed,map,colision,propertiesText){
-   if(move=="up"){
-      posy-= playerSpeed*2
-    }
-    if(move=="left"){
-      posx-= playerSpeed*2
-    }
-    if(move=="down"){
-      posy += playerSpeed*2
-    }
-    if(move=="right"){
-      posx += playerSpeed*2
-    }
-
-    let playerTileY = map.worldToTileY(posy);
-    let playerTileX = map.worldToTileY(posx);
-    
-    let tile = map.getTileAt(playerTileX , playerTileY , true, colision);
-    
-    //if (tile!=null) propertiesText.setText('Properties: ' + JSON.stringify(tile.properties.collides));
-    //console.log(tile)
-    if (tile!=null) {
-      if(JSON.stringify(tile.properties.collides)==='true') {
-        return false;
-      }
-    }
-      return true;
+var noclip = false
+//if(mode!="handicaphysique" || !checkescalier(deplacement,this.player.x,this.player.y,this.playerSpeed))
+function checkcollide(move, posx, posy, playerSpeed, map, colision, propertiesText) {
+  if (move == "up") {
+    posy -= playerSpeed * 2
+  }
+  if (move == "left") {
+    posx -= playerSpeed * 2
+  }
+  if (move == "down") {
+    posy += playerSpeed * 2
+  }
+  if (move == "right") {
+    posx += playerSpeed * 2
   }
 
-function mouvement(deplacement,player,playerSpeed,map,BGlayer,propertiesText,collide){
+  let playerTileY = map.worldToTileY(posy);
+  let playerTileX = map.worldToTileY(posx);
+
+  let tile = map.getTileAt(playerTileX, playerTileY, true, colision);
+
+  //if (tile!=null) propertiesText.setText('Properties: ' + JSON.stringify(tile.properties.collides));
+  //console.log(tile)
+  if (tile != null) {
+    if (JSON.stringify(tile.properties.collides) === 'true') {
+      return false;
+    }
+  }
+  return true;
+}
+
+function mouvement(deplacement, player, playerSpeed, map, BGlayer, propertiesText, collide) {
   let peutdeplacement = true;
-  peutdeplacement=checkcollide(deplacement,player.x,player.y,playerSpeed,map,collide,propertiesText)
+  peutdeplacement = checkcollide(deplacement, player.x, player.y, playerSpeed, map, collide, propertiesText)
   //console.log(peutdeplacement)
-  if(mode=="handicaphysique" && peutdeplacement!=false) peutdeplacement=checkescalier(deplacement,player.x,player.y,playerSpeed,map,BGlayer,propertiesText)
-  if(deplacement=="up"){
+  if (mode == "handicaphysique" && peutdeplacement != false) peutdeplacement = checkescalier(deplacement, player.x, player.y, playerSpeed, map, BGlayer, propertiesText)
+  if (deplacement == "up") {
     player.anims.play('up', true);
-    if(peutdeplacement==true) player.y -= playerSpeed;
+    if (peutdeplacement == true) player.y -= playerSpeed;
   }
-  if(deplacement=="left"){
+  if (deplacement == "left") {
     player.anims.play('left', true);
-    if(peutdeplacement==true) player.x -= playerSpeed;
+    if (peutdeplacement == true) player.x -= playerSpeed;
     player.flipX = false;
   }
-  if(deplacement=="down"){
+  if (deplacement == "down") {
     player.anims.play('down', true);
-    if(peutdeplacement==true) player.y += playerSpeed;
+    if (peutdeplacement == true) player.y += playerSpeed;
   }
-  if(deplacement=="right"){
+  if (deplacement == "right") {
     player.anims.play('right', true);
-    if(peutdeplacement==true) player.x += playerSpeed;
+    if (peutdeplacement == true) player.x += playerSpeed;
     player.flipX = true;
   }
 }
@@ -254,7 +255,7 @@ function create() {
 
   this.BGlayer = this.map.createLayer('map', tileset);
   this.Collision = this.map.createLayer('Collision', this.tilesetCollides);
-   this.CollidePorte = this.map.createLayer('CollidePorte', this.tilesetInterieur);
+  this.CollidePorte = this.map.createLayer('CollidePorte', this.tilesetInterieur);
 
 
   /* Player */
@@ -375,10 +376,10 @@ function create() {
       if (event.pairs[0].bodyB.id != 3) {
         if (event.pairs[0].bodyA.gameObject.texture.key == "player") {
           if (event.pairs[0].bodyB.gameObject.texture.key == "key") {
-          	if((mode=="parkinson" && keys==0)||mode!="parkinson"){
-            keys += 1
-            event.pairs[0].bodyB.gameObject.destroy()
-        	}
+            if ((mode == "parkinson" && keys == 0) || mode != "parkinson") {
+              keys += 1
+              event.pairs[0].bodyB.gameObject.destroy()
+            }
           } else if (keys > 0) {
             if (event.pairs[0].bodyB.gameObject.texture.key == "verticalDoor") {
               keys -= 1
@@ -409,22 +410,40 @@ function update(time, delta) {
   //controls.update(delta);
   var playerTileY = this.map.worldToTileY(this.player.x);
   var playerTileX = this.map.worldToTileY(this.player.y);
+  if ((playerTileY == 47 && playerTileX == 563) || (playerTileY == 47 && playerTileX == 564)) {
+    $("*").css("background-color", "black");
+    $("canvas").hide();
+    $("#wrapper").text("You escaped hq !");
+    setTimeout(function() {
+      window.location.href = "../credits";
+    }, 6000) //time
+  }
+
+  if ((playerTileY == 32 && playerTileX == 373) || (playerTileY == 33 && playerTileX == 373) || (playerTileY == 34 && playerTileX == 373) || (playerTileY == 35 && playerTileX == 373)) {
+    $("*").css("background-color", "black");
+    $("canvas").hide();
+    $("#wrapper").text("Game over the door was trapped and blew up");
+    setTimeout(function() {
+      window.location.href = "../credits";
+    }, 6000) //time
+  }
+
 
   if ((playerTileY == 31 && playerTileX == 151) || (playerTileY == 29 && playerTileX == 186) || (playerTileY == 29 && playerTileX == 185) || (playerTileY == 29 && playerTileX == 184) || (playerTileY == 31 && playerTileX == 152)) {
     this.cameras.main.zoom = 2.5
-  } else if ((playerTileY == 30 && playerTileX == 186) || (playerTileY == 30 && playerTileX == 185) || (playerTileY == 30 && playerTileX == 184) || (playerTileY == 32 && playerTileX == 151)|| (playerTileY == 32 && playerTileX == 152)) {
+  } else if ((playerTileY == 30 && playerTileX == 186) || (playerTileY == 30 && playerTileX == 185) || (playerTileY == 30 && playerTileX == 184) || (playerTileY == 32 && playerTileX == 151) || (playerTileY == 32 && playerTileX == 152)) {
     this.cameras.main.zoom = 9
   }
 
   /* Move player by keayboard */
   if (this.input.keyboard.addKey('z').isDown) {
-  mouvement("up",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
+    mouvement("up", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
   } else if (this.input.keyboard.addKey('q').isDown) {
-    mouvement("left",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
+    mouvement("left", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
   } else if (this.input.keyboard.addKey('s').isDown) {
-    mouvement("down",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
+    mouvement("down", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
   } else if (this.input.keyboard.addKey('d').isDown) {
-    mouvement("right",this.player,this.playerSpeed,this.map, this.BGlayer,this.propertiesText,this.Collision)
+    mouvement("right", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision)
   }
 
   if (this.input.keyboard.addKey('r').isDown) {
@@ -445,11 +464,11 @@ function update(time, delta) {
           objX = this.map.worldToTileY(this.keysList[k]["_tempVec2"].y);
 
           if (objX == playerTileX + i && objY == playerTileY + j) {
-            if((mode=="parkinson" && keys==0)||mode!="parkinson"){
-            	this.keysList[k].destroy()
-            	this.keysList.splice(k, 1)
-            	keys += 1
-        	}
+            if ((mode == "parkinson" && keys == 0) || mode != "parkinson") {
+              this.keysList[k].destroy()
+              this.keysList.splice(k, 1)
+              keys += 1
+            }
           }
         }
 
@@ -487,17 +506,17 @@ function update(time, delta) {
 
 
   /* gamepad control */
-if (this.gamepad) {
+  if (this.gamepad) {
     if (this.gamepad.axes[0].getValue() != 0 || this.gamepad.axes[1].getValue() != 0) {
       if (this.gamepad.axes[0].getValue() < 0) {
-        mouvement("left",this.player,this.playerSpeed)
+        mouvement("left", this.player, this.playerSpeed)
       } else if (this.gamepad.axes[0].getValue() > 0) {
-        mouvement("right",this.player,this.playerSpeed)
+        mouvement("right", this.player, this.playerSpeed)
       }
       if (this.gamepad.axes[1].getValue() < 0) {
-        mouvement("up",this.player,this.playerSpeed)
+        mouvement("up", this.player, this.playerSpeed)
       } else if (this.gamepad.axes[1].getValue() > 0) {
-        mouvement("down",this.player,this.playerSpeed)
+        mouvement("down", this.player, this.playerSpeed)
       }
     }
 
@@ -518,11 +537,11 @@ if (this.gamepad) {
             objX = this.map.worldToTileY(this.keysList[k]["_tempVec2"].y);
 
             if (objX == playerTileX + i && objY == playerTileY + j) {
-              if((mode=="parkinson" && keys==0)||mode!="parkinson"){
-              this.keysList[k].destroy()
-              this.keysList.splice(k, 1)
-              keys += 1
-          }
+              if ((mode == "parkinson" && keys == 0) || mode != "parkinson") {
+                this.keysList[k].destroy()
+                this.keysList.splice(k, 1)
+                keys += 1
+              }
             }
           }
 
@@ -555,11 +574,12 @@ if (this.gamepad) {
   this.marker.x = this.map.tileToWorldX(pointerTileX);
   this.marker.y = this.map.tileToWorldY(pointerTileY);
 
-
-  if (this.input.manager.activePointer.isDown) {
-    var tile = this.map.getTileAt(pointerTileX, pointerTileY, true, this.BGlayer);
-    this.player.x = this.map.tileToWorldX(pointerTileX);
-    this.player.y = this.map.tileToWorldY(pointerTileY);
+  if (noclip) {
+    if (this.input.manager.activePointer.isDown) {
+      var tile = this.map.getTileAt(pointerTileX, pointerTileY, true, this.BGlayer);
+      this.player.x = this.map.tileToWorldX(pointerTileX);
+      this.player.y = this.map.tileToWorldY(pointerTileY);
+    }
   }
 }
 
