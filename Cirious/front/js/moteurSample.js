@@ -43,10 +43,6 @@ function checkcollide(move,posx,posy,playerSpeed,map,colision,propertiesText){
     //console.log(tile)
     if (tile!=null) {
       if(JSON.stringify(tile.properties.collides)==='true') {
-
-        if (mode == "aveugle"){
-          
-        }
         return false;
       }
     }
@@ -88,13 +84,7 @@ function preload() {
   ]);
 
   /* Sprite */
-
-  if (mode=="aveugle"){
-    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvlaveugle.json');  
-  }
-  else{
-    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
-  }
+  this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
   this.load.image('key', 'assets/sprites/key.png');
   this.load.image('stick', 'assets/sprites/batondepierre.png');
   this.load.image('verticalDoor', 'assets/sprites/verticalDoor.png');
@@ -380,10 +370,10 @@ function create() {
       if (event.pairs[0].bodyB.id != 3) {
         if (event.pairs[0].bodyA.gameObject.texture.key == "player") {
           if (event.pairs[0].bodyB.gameObject.texture.key == "key") {
-            //event.pairs[0].bodyA.gameObject.alpha = .5
-            //this.remove(event.pairs[0].bodyA)
+          	if((mode=="parkinson" && keys==0)||mode!="parkinson"){
             keys += 1
             event.pairs[0].bodyB.gameObject.destroy()
+        	}
           } else if (keys > 0) {
             if (event.pairs[0].bodyB.gameObject.texture.key == "verticalDoor") {
               keys -= 1
@@ -450,9 +440,11 @@ function update(time, delta) {
           objX = this.map.worldToTileY(this.keysList[k]["_tempVec2"].y);
 
           if (objX == playerTileX + i && objY == playerTileY + j) {
-            this.keysList[k].destroy()
-            this.keysList.splice(k, 1)
-            keys += 1
+            if((mode=="parkinson" && keys==0)||mode!="parkinson"){
+            	this.keysList[k].destroy()
+            	this.keysList.splice(k, 1)
+            	keys += 1
+        	}
           }
         }
 
@@ -521,9 +513,11 @@ if (this.gamepad) {
             objX = this.map.worldToTileY(this.keysList[k]["_tempVec2"].y);
 
             if (objX == playerTileX + i && objY == playerTileY + j) {
+              if((mode=="parkinson" && keys==0)||mode!="parkinson"){
               this.keysList[k].destroy()
               this.keysList.splice(k, 1)
               keys += 1
+          }
             }
           }
 
@@ -637,9 +631,7 @@ var tp = [
   ],
 ]
 
-var circle;
-var graphics;
-var a = 0;
+
 
 var config = {
   type: Phaser.AUTO,
