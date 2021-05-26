@@ -1,17 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Courgette&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap);
+@font-face {
+    font-family: "Silkscreen";
+    src: url("slkscr.ttf");
+}
 
 body {
   height: 100vh;
-  background-color: #3c5cbb !important;
+  background-color: black !important;
 }
+
 
 
 #wrapper {
-  display: grid;
+  z-index: 1;
+  text-align: center;
+  font-size: 3vw;
+  margin: 2vw 0 2vw 0;
+  font-family: "Silkscreen";
+  color:white;
 }
 
-#wrapper div {
-  margin: 0%;
-  transition: border 0.1s ease-in-out;
+canvas {
+  z-index: 12;
 }

@@ -145,6 +145,7 @@ function preload() {
 }
 
 function create() {
+  $("#wrapper").hide()
   this.keysList = []
   this.doorList = []
   this.doorPos = [
@@ -413,7 +414,8 @@ function update(time, delta) {
   if ((playerTileY == 47 && playerTileX == 563) || (playerTileY == 47 && playerTileX == 564)) {
     $("*").css("background-color", "black");
     $("canvas").hide();
-    $("#wrapper").text("You escaped hq !");
+    $("#wrapper").show();
+    $("#wrapper").text("Game over the door was trapped and blew up");
     setTimeout(function() {
       window.location.href = "../credits";
     }, 6000) //time
@@ -422,7 +424,8 @@ function update(time, delta) {
   if ((playerTileY == 32 && playerTileX == 373) || (playerTileY == 33 && playerTileX == 373) || (playerTileY == 34 && playerTileX == 373) || (playerTileY == 35 && playerTileX == 373)) {
     $("*").css("background-color", "black");
     $("canvas").hide();
-    $("#wrapper").text("Game over the door was trapped and blew up");
+    $("#wrapper").show();
+    $("#wrapper").text("You escaped hq !");
     setTimeout(function() {
       window.location.href = "../credits";
     }, 6000) //time
