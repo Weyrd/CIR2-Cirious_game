@@ -326,9 +326,9 @@ function create() {
   this.marker.lineStyle(1.3, 0xffffff, 1);
   this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
 
-  this.imageKey = this.add.image(400, 200, 'key');
+  this.imageKey = this.add.image(window.innerWidth / 3.1, window.innerHeight / 3, 'key');
   this.imageKey.setScrollFactor(0);
-  this.numberKeys = this.add.text(408, 190, keys, {
+  this.numberKeys = this.add.text(window.innerWidth / 3.1 + 10, window.innerHeight / 3.13, keys, {
     fontFamily: 'Arial',
     fontSize: '18px',
     fill: '#fff',
@@ -475,6 +475,7 @@ function update(time, delta) {
     this.registry.destroy(); // destroy registry
     this.events.off(); // disable all active events
     this.scene.restart(); // restart current scene
+    keys = 0;
   }
 
   if (this.input.keyboard.addKey('f').isDown) {
@@ -534,14 +535,14 @@ function update(time, delta) {
   if (this.gamepad) {
     if (this.gamepad.axes[0].getValue() != 0 || this.gamepad.axes[1].getValue() != 0) {
       if (this.gamepad.axes[0].getValue() < 0) {
-        mouvement("left", this.player, this.playerSpeed)
+        mouvement("left", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
       } else if (this.gamepad.axes[0].getValue() > 0) {
-        mouvement("right", this.player, this.playerSpeed)
+        mouvement("right", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
       }
       if (this.gamepad.axes[1].getValue() < 0) {
-        mouvement("up", this.player, this.playerSpeed)
+        mouvement("up", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
       } else if (this.gamepad.axes[1].getValue() > 0) {
-        mouvement("down", this.player, this.playerSpeed)
+        mouvement("down", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
       }
     }
 
@@ -550,6 +551,7 @@ function update(time, delta) {
       this.registry.destroy(); // destroy registry
       this.events.off(); // disable all active events
       this.scene.restart(); // restart current scene
+      keys = 0;
     }
     if (this.gamepad.buttons[2].pressed) {
       console.log(this.player.x, this.player.y, playerTileX, playerTileY);
