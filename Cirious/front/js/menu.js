@@ -60,6 +60,6 @@ credits.addEventListener("mouseover", function() {
 });
 
 credits.addEventListener("mouseleave", function() {
-    credits.innerText = "Fauteuil roulant";
+    credits.innerText = "Credits";
     document.getElementById("desc").innerText = "";
 });
