@@ -58,8 +58,8 @@ app.get('/fauteuil', (req, res) => {
   res.sendFile(__dirname + '/front/html/fauteuil.html');
 });
 
-app.get('/aveugle', (req, res) => {
-  res.sendFile(__dirname + '/front/html/aveugle.html');
+app.get('/parkinson', (req, res) => {
+  res.sendFile(__dirname + '/front/html/parkinson.html');
 });
 
 app.get('/credit', (req, res) => {
@@ -67,6 +67,13 @@ app.get('/credit', (req, res) => {
 });
 
 
+app.get('/credits', (req, res) => {
+  res.sendFile(__dirname + '/front/html/credit.html');
+});
+
+app.get('/phasercestdelamerde', (req, res) => {
+  res.sendFile(__dirname + '/front/html/credit.html');
+});
 
 
 io.on('connection', (socket) => {
