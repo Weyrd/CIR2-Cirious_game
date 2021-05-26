@@ -90,7 +90,7 @@ function preload() {
 
   /* Sprite */
   if (mode =="aveugle"){
-    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvlaveugle.json');  
+    this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvlaveugle.json');
   }
   else{
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/lvl.json');
@@ -145,11 +145,19 @@ function preload() {
   this.load.image('tablebasse', 'assets/tilemaps/tiles/tablebasse.png');
 
 
-
+  if(mode=="handicaphysique"){
+    this.load.spritesheet('player', 'assets/sprites/fauteuil.png', {
+      frameWidth: 14,
+      frameHeight: 16
+    });
+  }
+  else{
   this.load.spritesheet('player', 'assets/sprites/meuf.png', {
     frameWidth: 14,
     frameHeight: 16
   });
+  }
+
 
 }
 
@@ -375,12 +383,9 @@ function create() {
 
   /* Doors */
   for (var i = 0; i < this.doorPos.length; i++) {
-    console.log(this.doorPos[i][2]);
     if (this.doorPos[i][2] == 1) { //vertical
-      console.log("vert");
       obj = this.matter.add.image(this.doorPos[i][0], this.doorPos[i][1], 'verticalDoor').setInteractive();
     } else { //horizontal
-      console.log("hor");
       obj = this.matter.add.image(this.doorPos[i][0], this.doorPos[i][1], 'horizontalDoor').setInteractive();
     }
     obj.alpha = 0
@@ -432,6 +437,7 @@ function update(time, delta) {
     $("canvas").hide();
     $("#wrapper").show();
     $("#wrapper").text("Game over the door was trapped and blew up");
+    this.oof.play();
     setTimeout(function() {
       window.location.href = "../credits";
     }, 6000) //time
@@ -442,6 +448,7 @@ function update(time, delta) {
     $("canvas").hide();
     $("#wrapper").show();
     $("#wrapper").text("You escaped hq !");
+    this.oof.play();
     setTimeout(function() {
       window.location.href = "../credits";
     }, 6000) //time
@@ -472,6 +479,7 @@ function update(time, delta) {
   }
 
   if (this.input.keyboard.addKey('r').isDown) {
+    this.music.stop()
     this.registry.destroy(); // destroy registry
     this.events.off(); // disable all active events
     this.scene.restart(); // restart current scene
@@ -539,7 +547,7 @@ function update(time, delta) {
       } else if (this.gamepad.axes[0].getValue() > 0) {
         mouvement("right", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
       }
-      if (this.gamepad.axes[1].getValue() < 0) {
+      else if (this.gamepad.axes[1].getValue() < 0) {
         mouvement("up", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
       } else if (this.gamepad.axes[1].getValue() > 0) {
         mouvement("down", this.player, this.playerSpeed, this.map, this.BGlayer, this.propertiesText, this.Collision,this.oof)
@@ -548,6 +556,7 @@ function update(time, delta) {
 
 
     if (this.gamepad.buttons[0].pressed) {
+      this.music.stop()
       this.registry.destroy(); // destroy registry
       this.events.off(); // disable all active events
       this.scene.restart(); // restart current scene
@@ -698,14 +707,8 @@ var config = {
       gravity: {
         y: 0
       },
-      debug: true
-    },
-    arcade: {
-      gravity: {
-        y: 0
-      },
-      debug: true
-    },
+      debug: false
+    }
   },
 
   scene: {

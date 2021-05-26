@@ -4,10 +4,21 @@ let aveugle = document.getElementById("cecite");
 let parkinson = document.getElementById("parkinson");
 let fauteuil = document.getElementById("fauteuil");
 let credits = document.getElementById("credits");
+let help = document.getElementById("help");
 
 sanshandicap.addEventListener("mouseover", function() {
     sanshandicap.innerText = "< Sans handicap >";
     document.getElementById("desc").innerText = "Une personne lambda, sans aucune difficulte pour communiquer avec les autres ou pour effectuer des taches.";
+});
+
+help.addEventListener("mouseover", function() {
+    help.innerText = "< Help >";
+    //document.getElementById("desc").innerText = "C'est l'aide";
+});
+
+help.addEventListener("mouseleave", function() {
+    help.innerText = "Help";
+    document.getElementById("desc").innerText = "";
 });
 
 sanshandicap.addEventListener("mouseleave", function() {
