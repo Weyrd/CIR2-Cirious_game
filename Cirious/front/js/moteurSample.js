@@ -332,7 +332,12 @@ function create() {
 
   /* Camera */
   this.cameras.main.startFollow(this.player);
-  this.cameras.main.zoom = 2.5;
+  if (mode == "myopie") {
+    this.cameras.main.zoom = 9
+  } else {
+
+    this.cameras.main.zoom = 2.5;
+  }
   cursors = this.input.keyboard.createCursorKeys();
 
 
@@ -433,7 +438,13 @@ function update(time, delta) {
 
 
   if ((playerTileY == 31 && playerTileX == 151) || (playerTileY == 29 && playerTileX == 186) || (playerTileY == 29 && playerTileX == 185) || (playerTileY == 29 && playerTileX == 184) || (playerTileY == 31 && playerTileX == 152)) {
-    this.cameras.main.zoom = 2.5
+
+    if (mode == "myopie") {
+      this.cameras.main.zoom = 9
+    } else {
+
+      this.cameras.main.zoom = 2.5;
+    }
   } else if ((playerTileY == 30 && playerTileX == 186) || (playerTileY == 30 && playerTileX == 185) || (playerTileY == 30 && playerTileX == 184) || (playerTileY == 32 && playerTileX == 151) || (playerTileY == 32 && playerTileX == 152)) {
     this.cameras.main.zoom = 9
   }
