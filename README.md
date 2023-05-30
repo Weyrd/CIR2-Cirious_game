@@ -9,7 +9,7 @@ Cirious Game is a second-year project that aims to address a societal issue thro
 The game has been developed using the following technologies:
 
 - Phaser: A popular game development framework for creating browser-based games.
-- Web Interface: The game is accessible through a web interface, allowing players to easily access and play the game in their browser.
+- Node.js: A server-side JavaScript runtime environment for running the Cirious Game server.
 
 ## Gameplay
 
@@ -20,6 +20,8 @@ The objective of Cirious Game is to navigate through the level while encounterin
 To play Cirious Game, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/Weyrd/CIR2-Cirious_game.git`
-2. Open the `index.html` file in your preferred web browser.
-3. Start playing the game and enjoy!
-
+2. Install Node.js and npm on your machine.
+3. Install the dependencies by running `npm install` in the project directory.
+4. Start the server by running `npm start` or `node server.js`.
+5. Open your web browser and navigate to `http://localhost:3000`.
+6. Start playing the game and enjoy!
